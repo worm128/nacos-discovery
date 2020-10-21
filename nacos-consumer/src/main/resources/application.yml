@@ -1,0 +1,15 @@
+server:
+  port: 3763
+spring:
+  application:
+    name: nacos-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.1.108:8848
+
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true

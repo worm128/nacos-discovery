@@ -18,8 +18,8 @@ public class SwaggerConfig {
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
-                        .description("customer api")
-                        .title("customer api")
+                        .description("nacos-consumer api")
+                        .title("nacos-consumer api")
                         .version("1.0.0")
                         .build())
                 .select()

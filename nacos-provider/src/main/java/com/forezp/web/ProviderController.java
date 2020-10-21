@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -47,8 +49,9 @@ public class ProviderController {
     }
 
     @GetMapping("/hi")
-    public String hi(@RequestParam(value = "name", defaultValue = "forezp", required = false) String name) {
-
-        return "hi " + name + GetIpAndPort.getIpAndPort();
+    public Mono<String> hi(@RequestParam(value = "name", defaultValue = "forezp", required = false) String name, ServerWebExchange serverWebExchange) throws InterruptedException {
+        String temp = "hi " + name + "<br/>" + GetIpAndPort.getIp(serverWebExchange);
+        //Thread.sleep(3000);
+        return Mono.just(temp);
     }
 }

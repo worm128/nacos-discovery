@@ -25,11 +25,10 @@ public class FeignConfig {
     public okhttp3.OkHttpClient getOkHttpClient() {
         HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor();
         logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        // 设置超时时间在FeignClient体系中会被动态覆盖，所以这里设置无效
         return new okhttp3.OkHttpClient.Builder()
-                .readTimeout(10000, TimeUnit.SECONDS)
-                .connectTimeout(10000, TimeUnit.SECONDS)
-                .writeTimeout(10000, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(120, TimeUnit.SECONDS)
                 .connectionPool(new ConnectionPool(10 /*maxIdleConnections*/, 3, TimeUnit.MINUTES))
                 .addNetworkInterceptor(logInterceptor)
                 .build();

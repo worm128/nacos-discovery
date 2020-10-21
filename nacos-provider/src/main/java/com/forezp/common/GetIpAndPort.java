@@ -1,8 +1,11 @@
 package com.forezp.common;
 
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.server.ServerWebExchange;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -38,19 +41,24 @@ public class GetIpAndPort {
         return localIP;
     }
 
-    //通过request获取ip
-    public static String getIp() {
-        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getServerName();
+//    //通过request获取ip
+//    public static String getIp() {
+//        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+//    }
+//
+//    //通过request获取端口
+//    public static String getLocalPort() {
+//        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getServerPort() + "";
+//    }
+//
+//
+//    public static String getIpAndPort() {
+//        return  getLocalIP() + ":" + getLocalPort();
+//    }
+
+    public static String getIp(ServerWebExchange serverWebExchange) {
+        ServerHttpRequest request = serverWebExchange.getRequest();
+
+        return request.getURI().toString();
     }
-
-    //通过request获取端口
-    public static String getLocalPort() {
-        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getServerPort() + "";
-    }
-
-
-    public static String getIpAndPort() {
-        return  getLocalIP() + ":" + getLocalPort();
-    }
-
 }
